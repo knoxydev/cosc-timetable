@@ -15,4 +15,4 @@ The repository "cosc-timetable" contains the following structure:
 This project appears to be implemented in Go, as indicated by the `go.mod` file and the `go.sum` file.
 
 ## Visualization
-![Project Screenshot](docs/table-visual.png)
+![Project Screenshot](https://github.com/knoxydev/cosc-timetable/blob/main/docs/table-visual.png)
