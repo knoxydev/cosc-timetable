@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Timetable</title>
+	<style>
+		body { font-family: sans-serif; }
+		h1 { text-align: center; }
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    th, td {
+      padding: 4px;
+      text-align: left;
+      border: 1.5px solid black;
+    }
+    th { cursor: pointer; }
+  </style>
+</head>
+<body>
+	<h1>Mini Project of Kamronbek Norkuziev | Timetable</h1>
+	<table border="1" id="timetable">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Day</th>
+				<th>Time</th>
+				<th>Room</th>
+				<th onclick="sort_by_level()">Level</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{range .}}
+			<tr>
+				<td>{{.Name}}</td>
+				<td>{{.Day}}</td>
+				<td>{{.Time}}</td>
+				<td>{{.Room}}</td>
+				<td>{{.Level}}</td>
+			</tr>
+			{{end}}
+		</tbody>
+	</table>
+
+
+	<script>
+	  let original_rows = [];
+	  let is_sorted = false;
+
+	  function sort_by_level()
+	  {
+	    var table = document.getElementById("timetable");
+	    var rows = Array.from(table.rows).slice(1);
+
+	    if (!is_sorted) {
+	      // store original rows when first sorting happens
+	      original_rows = rows.slice();
+
+	      // sort rows based on "Level"
+	      var sorted_rows = rows.sort((rowA, rowB) =>
+	      {
+	        var level_a = rowA.cells[4].innerText.toLowerCase();
+	        var level_b = rowB.cells[4].innerText.toLowerCase();
+	        return level_a < level_b ? -1 : (level_a > level_b ? 1 : 0);
+	      });
+
+	      // reorder rows in table
+	      sorted_rows.forEach(row => table.appendChild(row));
+
+	      is_sorted = true;
+	    } else {
+	      // if already sorted, reset to original order
+	      original_rows.forEach(row => table.appendChild(row));
+	      is_sorted = false;
+	    }
+	  }
+	</script>
+
+
+</body>
+</html>
+
